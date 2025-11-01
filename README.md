@@ -1,128 +1,135 @@
 # 🏥 Medical Appointment Scheduling System — Data Mining Project
 
-## 一、数据集简介
-
-**链接**： [Medical Appointment Scheduling System (Kaggle)](https://www.kaggle.com/datasets/carogonzalezgaltier/medical-appointment-scheduling-system)
-
-**数据内容大致包括：**
-
-- 患者 ID、性别、年龄
-- 就诊日期、预约日期
-- 医生 ID、科室
-- 是否按时到诊 (`No-show` 或 `Attended`)
-- 健康状况（如慢性病、有无保险等）
-- 预约类型（急诊 / 普通门诊）
-- 地理位置信息（城市、诊所）
-
-> 💡 虽然该数据集是模拟生成的（synthetic），但其结构与真实世界的医疗调度系统非常接近，非常适合进行数据挖掘实验。
+[Chinese version](./README_CN.md)
 
 ---
 
-## 🔍 二、数据挖掘可做的方向（非常丰富）
+## 1️⃣ Dataset Overview
 
-可以从以下 **三个层次** 进行挖掘分析：
+**Source:** [Medical Appointment Scheduling System (Kaggle)](https://www.kaggle.com/datasets/carogonzalezgaltier/medical-appointment-scheduling-system)
+
+**Main Features:**
+
+- Patient ID, gender, and age
+- Appointment and visit dates
+- Doctor ID and department
+- Attendance status (`No-show` / `Attended`)
+- Health conditions (e.g., chronic diseases, insurance coverage)
+- Appointment type (emergency / regular)
+- Geographical information (city, clinic)
+
+> 💡 Although the dataset is **synthetic**, it closely resembles real-world medical appointment systems and is ideal for data mining and predictive modeling experiments.
 
 ---
 
-### 1️⃣ 预测类任务（Supervised Learning）
+## 2️⃣ Potential Data Mining Directions
 
-**目标**：预测病人是否会按时就诊 (`No-show`)
+The dataset provides multiple opportunities for exploration and analysis.  
+Below are three major analytical directions:
 
-**应用意义**：提前预测爽约率，帮助医院优化资源调度（如减少空闲时段、合理安排医生）。
+---
 
-**可用算法：**
+### 🔹 (1) Predictive Modeling — _Supervised Learning_
+
+**Goal:** Predict whether a patient will attend their scheduled appointment (`No-show`).  
+**Practical Value:** Anticipate patient attendance to optimize hospital resource allocation and reduce idle capacity.
+
+**Possible Algorithms:**
 
 - Logistic Regression
-- Random Forest / XGBoost
-- Decision Tree / LightGBM
+- Decision Tree / Random Forest / XGBoost
+- LightGBM
 
-**可用特征：**
+**Potential Features:**
 
-- 提前预约天数（就诊日期 − 预约日期）
-- 患者年龄、性别、慢性病情况
-- 历史出勤率
-- 时间段（早上、下午）
+- Days between scheduling and appointment
+- Patient demographics and medical history
+- Past attendance rate
+- Time of appointment (morning / afternoon / evening)
 
-🎯 **研究亮点**：
+**🎯 Research Highlight:**
 
-> 设计一个模型来“动态预测爽约概率”，并与优化算法结合做“资源重分配”。
-
----
-
-### 2️⃣ 聚类与模式发现（Unsupervised Learning）
-
-**目标**：找出不同类型的患者或就诊模式
-
-**可行方向：**
-
-- 聚类患者：根据年龄、就诊频率、疾病类型、爽约率等划分患者群体。
-- 聚类医生 / 科室：根据工作负载、就诊量、患者满意度模式分组。
-- 发现季节性规律：利用时间序列聚类或频繁模式挖掘找出“高峰期”。
-
-**📊 示例输出：**
-
-- 患者类型 A：年轻、常预约、爽约率高
-- 患者类型 B：老年、慢性病、就诊规律性强
-
-> → 可以据此调整不同人群的预约策略（如提前短信提醒、分时段预约）。
+> Build a model to _dynamically predict patient no-show probability_ and integrate it with scheduling optimization for better hospital efficiency.
 
 ---
 
-### 3️⃣ 优化与调度（Optimization + Simulation）
+### 🔹 (2) Pattern Discovery & Clustering — _Unsupervised Learning_
 
-**目标**：优化医院的预约分配与资源利用
+**Goal:** Identify different types of patients and appointment behavior patterns.
 
-**策略思路：**
+**Possible Approaches:**
 
-- 输入预测模型的结果（爽约概率）
-- 使用优化算法（如线性规划、遗传算法、强化学习）进行资源分配
+- Cluster patients based on demographics, visit frequency, disease type, and attendance history
+- Cluster doctors or departments by workload or patient patterns
+- Detect seasonal trends and high-demand periods using time-series clustering
 
-**调度问题可包括：**
+**📊 Example Insights:**
 
-- 医生排班优化
-- 挂号时间分配优化
-- 门诊负载均衡
+- **Group A:** Young, frequent appointments, high no-show rate
+- **Group B:** Elderly, chronic diseases, consistent attendance pattern
 
-**🧮 方法示例：**
-
-- 用 `PuLP` 或 `Pyomo` 建模线性规划：最大化就诊人数、最小化等待时间。
-- 用 `SimPy` 模拟不同预约策略（如 overbooking、double booking）的效果。
+> These insights can guide customized strategies, such as reminders for high-risk groups or dynamic time-slot management.
 
 ---
 
-## 🧠 三、可作为数据挖掘项目的主题
+### 🔹 (3) Scheduling Optimization — _Optimization & Simulation_
 
-| 方向       | 题目示例                                                                   | 技术关键词                            |
-| ---------- | -------------------------------------------------------------------------- | ------------------------------------- |
-| **预测**   | Predicting Patient No-Show in Medical Appointments                         | Logistic Regression, XGBoost          |
-| **聚类**   | Discovering Appointment Behavior Patterns in Healthcare Systems            | K-Means, DBSCAN                       |
-| **优化**   | Optimization of Medical Resource Scheduling Based on Attendance Prediction | Linear Programming, Genetic Algorithm |
-| **可视化** | Temporal Analysis of Appointment and Attendance Trends                     | Time Series Plot, Heatmap             |
-| **综合型** | Data-Driven Appointment Scheduling Optimization in Healthcare              | ML + Optimization                     |
+**Goal:** Optimize appointment allocation and hospital resource utilization.
 
----
+**Approach:**
 
-## 🧩 四、总结建议
+- Combine predictive model outputs (no-show probabilities) with optimization techniques
+- Apply linear programming or metaheuristics for scheduling and capacity management
 
-| 评估维度    | 表现                                 |
-| ----------- | ------------------------------------ |
-| ✅ 数据质量 | 清晰、干净（适合初学和项目使用）     |
-| ✅ 隐私风险 | 模拟数据，无隐私问题                 |
-| ✅ 可扩展性 | 可加入时间序列或 GIS 数据            |
-| ✅ 学术潜力 | 高，可用于医疗资源调度优化研究       |
-| 🚫 局限     | 无真实医院操作日志，部分变量随机生成 |
+**Optimization Problems May Include:**
+
+- Doctor shift scheduling
+- Appointment time allocation
+- Workload balancing across departments
+
+**🧮 Example Techniques:**
+
+- Use `PuLP` or `Pyomo` for mathematical optimization
+- Simulate various scheduling strategies (e.g., overbooking, dynamic rescheduling) using `SimPy`
 
 ---
 
-## 🚀 推荐组合方案（非常适合做课程项目或论文）
+## 3️⃣ Recommended Research Topics
 
-1. **Step 1**：使用数据挖掘算法预测患者爽约率
-2. **Step 2**：基于预测结果构建调度优化模型（如最大化资源利用率）
-3. **Step 3**：用可视化展示不同策略下的预约效率与患者满意度
-
-最终可以形成一个完整的研究主题：
-
-> 🎯 **“Data-Driven Medical Appointment Scheduling Optimization”**
+| Direction         | Example Project Title                                                      | Techniques / Keywords                 |
+| ----------------- | -------------------------------------------------------------------------- | ------------------------------------- |
+| **Prediction**    | Predicting Patient No-Show in Medical Appointments                         | Logistic Regression, XGBoost          |
+| **Clustering**    | Discovering Appointment Behavior Patterns in Healthcare Systems            | K-Means, DBSCAN                       |
+| **Optimization**  | Optimization of Medical Resource Scheduling Based on Attendance Prediction | Linear Programming, Genetic Algorithm |
+| **Visualization** | Temporal Analysis of Appointment and Attendance Trends                     | Time-Series Plot, Heatmap             |
+| **Comprehensive** | Data-Driven Appointment Scheduling Optimization in Healthcare              | Machine Learning + Optimization       |
 
 ---
-# COM6004_DataMiningProject
+
+## 4️⃣ Evaluation Summary
+
+| Evaluation Aspect     | Description                                                               |
+| --------------------- | ------------------------------------------------------------------------- |
+| ✅ **Data Quality**   | Well-structured and clean; suitable for educational or research use       |
+| ✅ **Privacy Risk**   | None — synthetic dataset                                                  |
+| ✅ **Scalability**    | Can integrate with time-series or spatial data                            |
+| ✅ **Research Value** | High — supports studies on healthcare scheduling optimization             |
+| 🚫 **Limitation**     | Lacks real hospital operation logs; some variables are randomly generated |
+
+---
+
+## 5️⃣ Recommended Project Workflow
+
+1. **Step 1:** Predict patient no-show probability using data mining algorithms
+2. **Step 2:** Use prediction results to optimize scheduling and resource allocation
+3. **Step 3:** Visualize results to evaluate scheduling efficiency and patient satisfaction
+
+**🎯 Final Project Theme:**
+
+> **“Data-Driven Medical Appointment Scheduling Optimization”**
+
+---
+
+### 📁 Project Code Repository
+
+**COM6004_DataMiningProject**
