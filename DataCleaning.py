@@ -27,12 +27,8 @@ Slots_dup = Slots
 # print("\n")
 
 
-def Find_NaN(DataFrame):
-    """Find NaN
+def Find_NaN(DataFrame, name="DataFrame"):
 
-    Args:
-        DataFrame (DataFrame):
-    """
     total_rows = DataFrame.shape[0]
     na_sum = DataFrame.isna().sum()
     na_percentage = ((na_sum / total_rows) * 100).round(2)
@@ -43,10 +39,12 @@ def Find_NaN(DataFrame):
         "na_percentage": na_percentage,
     }
 
-    print(f" the total rows are: {total_rows}")
+    print(f" the total rows of {name} are: {total_rows}")
+    print("\n")
     print(
         f"the overview of NaN value:\n {pd.DataFrame({'total NaN values': na_sum,'the percentage of NaN %':na_percentage})}"
     )
+    print("==============================")
     # 缺失值条形图
     msno.bar(DataFrame)
     plt.show()
@@ -54,6 +52,6 @@ def Find_NaN(DataFrame):
     return stats
 
 
-Find_NaN(Appointments_dup)
-Find_NaN(Patients_dup)
-Find_NaN(Slots_dup)
+Find_NaN(Appointments_dup, name="Appointments_dup")
+Find_NaN(Patients_dup, name="Patients_dup")
+Find_NaN(Slots_dup, name="Slot_dup")
