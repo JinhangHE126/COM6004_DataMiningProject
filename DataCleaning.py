@@ -6,21 +6,17 @@ import matplotlib.pyplot as plt
 path = "./Datasets/Raw/"
 
 # DataLoading
-Appointments = pd.read_csv(path + "appointments.csv")
-Patients = pd.read_csv(path + "patients.csv")
-Slots = pd.read_csv(path + "slots.csv")
+survey = pd.read_csv(path + "survey.csv")
 # print(f"the appointments.csv feature are {Appointments.columns}")
 # print(Patients.columns)
 # print(Slots.columns)
 
 
 """
-# handing the appointment.csv
+# handing the raw datasets
 
 """
-Appointments_dup = Appointments
-Patients_dup = Patients
-Slots_dup = Slots
+survey_dup = survey
 
 # print(Appointments_dup.columns)
 # print(f" the total rows are: {Appointments_dup.shape[0]}")
@@ -28,6 +24,15 @@ Slots_dup = Slots
 
 
 def Find_NaN(DataFrame, name="DataFrame"):
+    """Find the NaN value in individual file
+
+    Args:
+        DataFrame (DataFrame): _description_
+        name (str, optional): _description_. Defaults to "DataFrame".
+
+    Returns:
+        _type_: _description_
+    """
 
     total_rows = DataFrame.shape[0]
     na_sum = DataFrame.isna().sum()
@@ -44,14 +49,9 @@ def Find_NaN(DataFrame, name="DataFrame"):
     print(
         f"the overview of NaN value:\n {pd.DataFrame({'total NaN values': na_sum,'the percentage of NaN %':na_percentage})}"
     )
-    print("==============================")
+    print("===============================================")
     # 缺失值条形图
     msno.bar(DataFrame)
     plt.show()
 
     return stats
-
-
-Find_NaN(Appointments_dup, name="Appointments_dup")
-Find_NaN(Patients_dup, name="Patients_dup")
-Find_NaN(Slots_dup, name="Slot_dup")
