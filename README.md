@@ -15,8 +15,19 @@
 step:
 
 1. 首先我需要去理解数据集.
-2. 清洗数据集, 标准化处理.
+1. 清洗数据集, 标准化处理.
    1. 标准化列名 [全部小写, 下划线连接]
    2. 标准化每一个属性的字段值
-      1.
-   3. 标准化每个数据数据的文本[根据每个数据的属性进行缩写什么都] 稍后我会发出一份说明文档. 「因为这是一份问卷调查. 」
+      1. 对 `gender` 属性进行标准化处理[Male, Female, Other]
+      2. 对 `no_employees` 属性进行标准化处理[1-5, 6-25, 26-100, 100-500, 500-1000, 1000+]
+      3. 对`leave`属性进行标准化处理[Easy, Slightly easy,Slightly difficult, Difficult, Don't know]
+      4. 对`coworkers`属性进行标准化处理[Yes, No, Some]
+      5. 对 `supervisor` 属性进行标准化处理[Yes, No, Some]
+      6.
+   3. 处理缺失值
+      1. 对 `self_employed` 属性的缺失值进行填充[No]
+      2. 对 `treatment == 'Yes'` 属性 and `work_interfere` 属性为空的行, 填充众数
+      3. 对 `work_interfere` 属性为空的行, `treatment  == 'No'`, 填充 `/` 表示不适用
+      4. 对 `country` 不是 `United States` 且 `state` 填充 ·`/`, 填充 `/` 表示不适用
+      5. 对 `state` 属性的缺失值进行填充[`/`]
+      6. 对 `comments` 属性 drop 整列
